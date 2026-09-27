@@ -26,7 +26,14 @@ Dialog {
     property var pendingDependencyCallbacks: []
     property var pendingNeighborCallbacks: []
 
-    title: qsTr("Configure thcrap -") + " " + gameItem.en_title
+    function localizedTitle() {
+        if (LanguageManager.language === "ja_JP") {
+            return gameItem.jp_title || gameItem.en_title || "";
+        }
+        return gameItem.en_title || gameItem.jp_title || "";
+    }
+
+    title: qsTr("Configure thcrap -") + " " + localizedTitle()
     width: parent.width > 700 ? 700 * UI.Size.scale : parent.width * 0.9
     height: parent.height > 600 ? 600 * UI.Size.scale : parent.height * 0.9
     anchors.centerIn: parent
@@ -47,15 +54,15 @@ Dialog {
         id: downloader
 
         onDownloadFinished: {
-            statusText.text = "Downloaded repository successfully"
+            statusText.text = qsTr("Downloaded repository successfully")
             isDownloading = false
-            statusText.text = "Main repository downloaded, discovering patches..."
+            statusText.text = qsTr("Main repository downloaded, discovering patches...")
             discoverPatches()
         }
 
         onDownloadFailed: function(errorString) {
             console.log("Download failed:", errorString)
-            statusText.text = "Download failed: " + errorString
+            statusText.text = qsTr("Download failed: ") + errorString
             isDownloading = false
         }
 
@@ -108,11 +115,11 @@ Dialog {
     }
 
     function discoverPatches() {
-        statusText.text = "Discovering patches..."
+        statusText.text = qsTr("Discovering patches...")
         const repoPath = appDataPath + "/thcrap/repos/thpatch/repo.js"
         
         if (!fileIO.exists(repoPath)) {
-            statusText.text = "Repository not found. Please download patches first."
+            statusText.text = qsTr("Repository not found. Please download patches first.")
             return
         }
 
@@ -147,10 +154,10 @@ Dialog {
             } else {
                 availablePatches = allPatches
                 updatePatchList()
-                statusText.text = "Found " + allPatches.length + " patches"
+                statusText.text = qsTr("Found %1 patches").arg(allPatches.length)
             }
         } catch (e) {
-            statusText.text = "Failed to parse repository: " + e
+            statusText.text = qsTr("Failed to parse repository: ") + e
             console.log("Error:", e)
         }
     }
@@ -159,7 +166,7 @@ Dialog {
         if (index >= neighbors.length) {
             availablePatches = allPatches
             updatePatchList()
-            statusText.text = "Found " + allPatches.length + " patches from " + (neighbors.length + 1) + " repositories"
+            statusText.text = qsTr("Found %1 patches from %2 repositories").arg(allPatches.length).arg(neighbors.length + 1)
             return
         }
 
@@ -174,7 +181,7 @@ Dialog {
         const urlParts = neighborUrl.split('/').filter(s => s.length > 0)
         const repoName = urlParts.length >= 2 ? urlParts[urlParts.length - 2] : (urlParts[urlParts.length - 1] || "unknown")
 
-        statusText.text = "Processing neighbor " + (index + 1) + "/" + neighbors.length + ": " + repoName
+        statusText.text = qsTr("Processing neighbor %1/%2: %3").arg(index + 1).arg(neighbors.length).arg(repoName)
         processedRepos.push(neighborUrl)
         
         pendingNeighborCallbacks.push(function(content) {
@@ -216,7 +223,7 @@ Dialog {
     function downloadPatches() {
         const repoUrl = "https://srv.thpatch.net/repo.js"
         const localPath = appDataPath + "/thcrap/repos/thpatch/repo.js"
-        statusText.text = "Downloading thpatch repository..."
+        statusText.text = qsTr("Downloading thpatch repository...")
         isDownloading = true
         downloader.download(repoUrl, localPath, false, false)
     }
@@ -385,7 +392,7 @@ Dialog {
 
         Text {
             id: statusText
-            text: "Ready"
+            text: qsTr("Ready")
             color: Material.foreground
             Layout.fillWidth: true
             wrapMode: Text.WordWrap

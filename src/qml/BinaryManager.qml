@@ -36,7 +36,7 @@ Window {
         onDownloadFinished: {
             console.log("Download finished!")
             statusOutput.color = "#70fa6b"
-            statusOutput.text = "Download finished!"
+            statusOutput.text = qsTr("Download finished!")
             AppSettings.setValue("wine", root.wineVerToSave)
         }
         onDownloadProgress: function (bytesReceived, bytesTotal) {
@@ -79,7 +79,7 @@ Window {
                 const dl = BinaryManager.downloadThcrap(appData, "/thcrap/thcrap.zip", downloader, fileIO)
                 if (!dl) {
                     statusOutput.color = "#e3e3e3"
-                    statusOutput.text = "thcrap already downloaded!"
+                    statusOutput.text = qsTr("thcrap already downloaded!")
                 }
             }
         }
@@ -121,7 +121,7 @@ Window {
                 const dl = BinaryManager.downloadDosbox(appData, "/dosbox-x/dosbox-x.zip", downloader, fileIO)
                 if (!dl) {
                     statusOutput.color = "#e3e3e3"
-                    statusOutput.text = "Dosbox-x already downloaded!"
+                    statusOutput.text = qsTr("Dosbox-x already downloaded!")
                     AppSettings.setValue("dosbox-x", "downloaded")
                 } else {
                     AppSettings.setValue("dosbox-x", "downloaded")
@@ -165,7 +165,7 @@ Window {
                 const dl = BinaryManager.downloadProton("7-55", appData, "/proton/7-55.tar.gz", downloader, fileIO)
                 if (!dl) {
                     statusOutput.color = "#e3e3e3"
-                    statusOutput.text = "Proton version already downloaded! Setting to default game launcher.."
+                    statusOutput.text = qsTr("Proton version already downloaded! Setting to default game launcher..")
                     AppSettings.setValue("wine", wineVerToSave)
                 }
             }

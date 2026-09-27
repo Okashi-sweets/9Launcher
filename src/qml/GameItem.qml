@@ -15,6 +15,13 @@ Button {
     property var mainWindow: null
     id: button
 
+    function localizedTitle() {
+        if (LanguageManager.language === "ja_JP") {
+            return button.item.jp_title || button.item.en_title || "";
+        }
+        return button.item.en_title || button.item.jp_title || "";
+    }
+
     onClicked: {
         if (isInstalled) {
             mainWindow.openGameLaunchDialog(item, isPC98);
@@ -83,7 +90,7 @@ Button {
         Text {
             anchors.fill: parent
             anchors.margins: 5
-            text: button.item.en_title
+            text: button.localizedTitle()
             color: "white"
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
@@ -121,7 +128,7 @@ Button {
     FileDialog {
         id: gameDialog
         currentFolder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
-        nameFilters: button.isPC98 ? ["PC-98 Disk Image (*.hdi)"] : ["Executable (*.exe)"]
+        nameFilters: button.isPC98 ? [qsTr("PC-98 Disk Image (*.hdi)")] : [qsTr("Executable (*.exe)")]
         onAccepted: {
             const file = gameDialog.currentFile;
             const targetItem = button.item;

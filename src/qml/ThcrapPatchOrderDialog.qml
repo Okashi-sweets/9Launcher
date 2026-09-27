@@ -23,6 +23,13 @@ Dialog {
     property int downloadsPending: 0
     property bool downloadInProgress: false
 
+    function localizedTitle() {
+        if (LanguageManager.language === "ja_JP") {
+            return gameItem.jp_title || gameItem.en_title || "";
+        }
+        return gameItem.en_title || gameItem.jp_title || "";
+    }
+
     Downloader {
         id: downloader
         
@@ -44,7 +51,7 @@ Dialog {
         }
     }
 
-    title: qsTr("Configure Patch Order -") + " " + gameItem.en_title
+    title: qsTr("Configure Patch Order -") + " " + localizedTitle()
     width: parent.width > 700 ? 700 * UI.Size.scale : parent.width * 0.9
     height: parent.height > 600 ? 600 * UI.Size.scale : parent.height * 0.9
     anchors.centerIn: parent

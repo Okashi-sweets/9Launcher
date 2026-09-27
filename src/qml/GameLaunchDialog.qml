@@ -20,7 +20,14 @@ Dialog {
     property var gameItem: ({})
     property bool isPC98: false
 
-    title: qsTr("Launch ") + gameItem.en_title
+    function localizedTitle() {
+        if (LanguageManager.language === "ja_JP") {
+            return gameItem.jp_title || gameItem.en_title || "";
+        }
+        return gameItem.en_title || gameItem.jp_title || "";
+    }
+
+    title: qsTr("Launch ") + localizedTitle()
     width: 650
     anchors.centerIn: parent
     modal: true

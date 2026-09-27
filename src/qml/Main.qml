@@ -68,7 +68,7 @@ Window {
                 model: ObjectModel {
                     Controls.MTabButton {
                         property string json: "games.json"
-                        text: "Official Games"
+                        text: qsTr("Official Games")
                     }
                     // Controls.MTabButton {
                     //     property string json: "fan_games.json"
@@ -76,7 +76,7 @@ Window {
                     // }
                     Controls.MTabButton {
                         property string json: "seihou.json"
-                        text: "Seihou"
+                        text: qsTr("Seihou")
                     }
                 }
 
@@ -90,7 +90,7 @@ Window {
             Layout.preferredHeight: 30
             Layout.alignment: Qt.AlignLeft
             UI.H4 {
-                text: "Main Games"
+                text: qsTr("Main Games")
                 font.bold: true
                 padding: 5
             }
@@ -120,7 +120,7 @@ Window {
             Layout.preferredHeight: 30
             Layout.alignment: Qt.AlignLeft
             UI.H4 {
-                text: "Spinoffs"
+                text: qsTr("Spinoffs")
                 font.bold: true
                 padding: 5
             }

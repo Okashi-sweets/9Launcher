@@ -42,7 +42,7 @@ Rectangle {
     FooterPanel {
         id: settingsMenu
         width: 330
-        height: Qt.platform.os === "linux" ? 260 : 220
+        height: Qt.platform.os === "linux" ? 310 : 270
         alignTo: "left"
         enabled: false
 
@@ -79,6 +79,22 @@ Rectangle {
                     text: qsTr("Launch Info")
                     id: launchInfoSetting
                     update: "launchInfo"
+                }
+
+                RowLayout {
+                    spacing: 10
+
+                    MButton {
+                        text: qsTr("Japanese")
+                        Layout.preferredWidth: 150
+                        onClicked: LanguageManager.setLanguage("ja_JP")
+                    }
+
+                    MButton {
+                        text: qsTr("English")
+                        Layout.preferredWidth: 150
+                        onClicked: LanguageManager.setLanguage("en_US")
+                    }
                 }
 
                 RowLayout {
@@ -172,7 +188,7 @@ Rectangle {
                             variant: Controls.Alert.Variant.Standard,
                         }
 
-						Controls.AlertController.alert("Info copied to clipboard!", details, 3500, alerts.objectName)
+                        Controls.AlertController.alert(qsTr("Info copied to clipboard!"), details, 3500, alerts.objectName)
                     }
                 }
             }
