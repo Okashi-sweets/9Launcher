@@ -56,7 +56,7 @@ if (LINUX)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Os")
 endif()
 
-find_package(Qt6 REQUIRED COMPONENTS Quick QuickControls2 Core Core5Compat ShaderTools)
+find_package(Qt6 REQUIRED COMPONENTS Quick QuickControls2 Core Core5Compat ShaderTools LinguistTools)
 
 qt_add_executable(9Launcher
     src/main.cpp
@@ -91,6 +91,7 @@ qt_add_qml_module(9Launcher
             ${GAME_IMAGES}
 
         SOURCES
+            src/cpp/include/LanguageManager.h
             src/cpp/include/AppSettings.h
             src/cpp/include/Clipboard.h
             src/cpp/include/Downloader.h
@@ -100,6 +101,7 @@ qt_add_qml_module(9Launcher
             src/cpp/include/Util.h
 
             src/cpp/AppSettings.cpp
+            src/cpp/LanguageManager.cpp
             src/cpp/Clipboard.cpp
             src/cpp/Downloader.cpp
             src/cpp/FileIO.cpp
@@ -119,6 +121,12 @@ qt6_add_shaders(9Launcher "ninelauncher_shaders"
         src/shaders/image_mask.frag
     OUTPUTS
         image_mask.frag.qsb
+)
+
+qt_add_translations(9Launcher
+    TS_FILES
+        src/translations/9Launcher_en_US.ts
+        src/translations/9Launcher_ja_JP.ts
 )
 
 target_include_directories(9Launcher

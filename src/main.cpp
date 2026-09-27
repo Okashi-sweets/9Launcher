@@ -8,6 +8,7 @@
 #include "Downloader.h"
 #include "FileIO.h"
 #include "GameLauncher.h"
+#include "LanguageManager.h"
 #include "RPC.h"
 #include "Util.h"
 
@@ -41,11 +42,13 @@ int main(int argc, char *argv[])
     app.setApplicationVersion("0.0.2");
     QQmlApplicationEngine engine;
     static AppSettings settings("wearr", "NineLauncher");
+    LanguageManager languageManager(&settings, &engine, &app);
     static Clipboard clipboard = Clipboard();
     static Downloader downloader = Downloader();
     static Util util = Util();
     static RPC rpc = RPC();
     qmlRegisterSingletonInstance<AppSettings>("NineLauncher", 1, 0, "AppSettings", &settings);
+    engine.rootContext()->setContextProperty("LanguageManager", &languageManager);
     engine.rootContext()->setContextProperty("Clipboard", &clipboard);
     engine.rootContext()->setContextProperty("Downloader", &downloader);
     engine.rootContext()->setContextProperty("QtVersion", QString(qVersion()));
