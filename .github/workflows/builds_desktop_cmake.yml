@@ -251,7 +251,7 @@ jobs:
             cat > release_notes.md << EOF
           ## What's Changed
 
-          **Full Changelog**: https://github.com/wearrrrr/9Launcher/compare/${PREV_TAG}...${GITHUB_REF_NAME}
+          **Full Changelog**: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/compare/${PREV_TAG}...${GITHUB_REF_NAME}
           EOF
             echo "notes_file=release_notes.md" >> $GITHUB_OUTPUT
           fi
