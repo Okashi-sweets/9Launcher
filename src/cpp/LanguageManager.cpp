@@ -26,12 +26,16 @@ QString LanguageManager::language() const
 
 void LanguageManager::setLanguage(const QString &language)
 {
-    if ((language != "ja_JP" && language != "en_US") || language == m_language) {
+    if (language != "ja_JP" && language != "en_US") {
+        return;
+    }
+
+    m_settings->setValue("language", language);
+    if (language == m_language) {
         return;
     }
 
     m_language = language;
-    m_settings->setValue("language", m_language);
     applyLanguage();
     emit languageChanged();
 }
