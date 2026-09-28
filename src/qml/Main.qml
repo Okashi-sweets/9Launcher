@@ -31,7 +31,10 @@ Window {
     }
 
     property var mainModel: []
+    property var pc98Model: []
+    property var windowsModel: []
     property var spinoffModel: []
+    property bool isOfficialGames: false
     property var selectedGameItem: ({})
     property bool selectedIsPC98: false
 
@@ -39,7 +42,10 @@ Window {
 
     function populateGamesList(jsonFile) {
         mainModel = [];
+        pc98Model = [];
+        windowsModel = [];
         spinoffModel = [];
+        isOfficialGames = false;
         Core.populateGamesList(jsonFile);
     }
 
@@ -90,10 +96,12 @@ Window {
             Layout.preferredHeight: 30
             Layout.alignment: Qt.AlignLeft
             UI.H4 {
-                text: qsTr("Main Games")
+                text: window.isOfficialGames ? qsTr("Main Games (PC-98)") : qsTr("Main Games")
                 font.bold: true
                 padding: 5
             }
+
+            visible: window.isOfficialGames ? window.pc98Model.length > 0 : window.windowsModel.length > 0
         }
 
         Flow {
@@ -105,7 +113,7 @@ Window {
 
             Component.onCompleted: populateGamesList(tabs.currentItem.json);
             Repeater {
-                model: window.mainModel
+                model: window.isOfficialGames ? window.pc98Model : window.windowsModel
                 delegate: GameItem {
                     width: 150
                     height: 55
@@ -114,6 +122,41 @@ Window {
                     mainWindow: window
                 }
             }
+
+            visible: window.isOfficialGames ? window.pc98Model.length > 0 : window.windowsModel.length > 0
+        }
+
+        Item {
+            Layout.preferredHeight: 30
+            Layout.alignment: Qt.AlignLeft
+            UI.H4 {
+                text: qsTr("Main Games (Windows)")
+                font.bold: true
+                padding: 5
+            }
+
+            visible: window.isOfficialGames && window.windowsModel.length > 0
+        }
+
+        Flow {
+            id: windowsLayout
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignTop
+            spacing: 5
+            padding: 10
+
+            Repeater {
+                model: window.windowsModel
+                delegate: GameItem {
+                    width: 150
+                    height: 55
+                    item: modelData
+                    isPC98: false
+                    mainWindow: window
+                }
+            }
+
+            visible: window.isOfficialGames && window.windowsModel.length > 0
         }
 
         Item {

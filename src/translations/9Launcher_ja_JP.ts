@@ -2,6 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ja_JP">
 <context><name>Main</name>
+<message><source>Main Games (PC-98)</source><translation>本編(PC-98)</translation></message><message><source>Main Games (Windows)</source><translation>本編(Windows)</translation></message>
 <message><source>Official Games</source><translation>公式ゲーム</translation></message><message><source>Seihou</source><translation>西方</translation></message><message><source>Main Games</source><translation>本編ゲーム</translation></message><message><source>Spinoffs</source><translation>外伝</translation></message><message><source>Reset Settings</source><translation>設定をリセット</translation></message><message><source>Are you sure you want to reset all settings?</source><translation>すべての設定をリセットしますか？</translation></message><message><source>Close</source><translation>閉じる</translation></message><message><source>Reset</source><translation>リセット</translation></message><message><source>PC-98 Emulator Not Found!</source><translation>PC-98エミュレーターが見つかりません</translation></message><message><source>No valid PC-98 emulator was not found!&#10;Please make sure it is installed and the path is set in the binary manager.</source><translation>有効なPC-98エミュレーターが見つかりません。&#10;インストールされていることと、バイナリマネージャーでパスが設定されていることを確認してください。</translation></message><message><source>Open Binary Manager</source><translation>バイナリマネージャーを開く</translation></message>
 </context>
 <context><name>Footer</name>

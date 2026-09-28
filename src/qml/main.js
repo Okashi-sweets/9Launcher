@@ -10,7 +10,15 @@ function populateGamesList(jsonFile) {
         Object.values(games.games),
     );
 
-  if (jsonFile == "games.json") {
-    window.spinoffModel = Object.values(games.spinoffs);
-  }
+    if (jsonFile == "games.json") {
+        window.isOfficialGames = true;
+        window.pc98Model = window.mainModel.filter(game => game.isPC98 === true);
+        window.windowsModel = window.mainModel.filter(game => game.isPC98 !== true);
+        window.spinoffModel = Object.values(games.spinoffs);
+    } else {
+        window.isOfficialGames = false;
+        window.pc98Model = [];
+        window.windowsModel = window.mainModel;
+        window.spinoffModel = [];
+    }
 }

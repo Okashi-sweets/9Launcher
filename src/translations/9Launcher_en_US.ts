@@ -5,6 +5,8 @@
 <message><source>Official Games</source><translation>Official Games</translation></message>
 <message><source>Seihou</source><translation>Seihou</translation></message>
 <message><source>Main Games</source><translation>Main Games</translation></message>
+<message><source>Main Games (PC-98)</source><translation>Main Games (PC-98)</translation></message>
+<message><source>Main Games (Windows)</source><translation>Main Games (Windows)</translation></message>
 <message><source>Spinoffs</source><translation>Spinoffs</translation></message>
 <message><source>Reset Settings</source><translation>Reset Settings</translation></message>
 <message><source>Are you sure you want to reset all settings?</source><translation>Are you sure you want to reset all settings?</translation></message>
