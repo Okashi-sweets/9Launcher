@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QProcess>
 
 struct GameInfo {
     QString gamePath;
@@ -16,6 +17,7 @@ public:
 
     Q_INVOKABLE bool launchGame(const QString &gamePath, const QString &gameCWD, const QString &gameName, const QString &gameIcon, const bool &isPC98);
     Q_INVOKABLE bool launchWithThcrap(const QString &configPath, const QString &gamePath, const QString &gameCWD, const QString &gameName, const QString &gameIcon);
+    Q_INVOKABLE bool launchWithThprac(const QString &gamePath, const QString &gameCWD, const QString &gameName, const QString &gameIcon);
 
     bool LaunchThread(const QString &gamePath, const QString &gameCWD, const QString &gameName, const QString &gameIcon);
     bool LaunchThcrapThread(const QString &configPath, const QString &gamePath, const QString &gameCWD, const QString &gameName, const QString &gameIcon);
@@ -25,10 +27,15 @@ public:
 
     GameInfo GetCurrentGameInfo();
 
+signals:
+    void launchError(const QString &errorCode);
+
 private:
     const QString GetWinePathFromSettings();
     const QString GetDosboxXPathFromSettings();
     bool LaunchLinux(const QString &gamePath, const QString &gameCWD);
     bool Launch_PC98(const QString &gamePath);
     bool LaunchWindows(const QString &gamePath, const QString &gameCWD);
+
+    QProcess *m_thpracProcess = nullptr;
 };

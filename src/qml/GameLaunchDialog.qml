@@ -72,6 +72,39 @@ Dialog {
         control.close();
     }
 
+    function launchWithThprac() {
+        const installedJSON = JSON.parse(fileIO.read(StandardPaths.writableLocation(StandardPaths.AppDataLocation) + "/installed.json"));
+        const gameItemData = installedJSON.installed.filter(game => game.game_id === gameItem.game_id)[0];
+        if (gameItemData == null) {
+            return;
+        }
+
+        const path = gameItemData.path;
+        const cwd = path.substring(0, path.lastIndexOf("/"));
+        if (!gameLauncher.launchWithThprac(path, cwd, gameItem.en_title + " (thprac)", gameItem.game_id)) {
+            return;
+        }
+        control.close();
+    }
+
+    function launchOptions() {
+        const options = gameItem.launch_options || ["normal"];
+        return options.filter(option => option !== "thprac" || Qt.platform.os === "windows");
+    }
+
+    function optionLabel(option) {
+        if (option === "normal") return qsTr("Launch Game");
+        if (option === "thprac") return qsTr("Launch with thprac");
+        if (option === "thcrap") return qsTr("Launch with thcrap");
+        return option;
+    }
+
+    function launchOption(option) {
+        if (option === "normal") launchGame();
+        else if (option === "thprac") launchWithThprac();
+        else if (option === "thcrap") launchWithThcrap();
+    }
+
     function removeGame() {
         const appDataPath = StandardPaths.writableLocation(StandardPaths.AppDataLocation);
         const installedJSON = JSON.parse(fileIO.read(appDataPath + "/installed.json"));
@@ -89,6 +122,33 @@ Dialog {
 
     GameLauncher {
         id: gameLauncher
+
+        onLaunchError: function(errorCode) {
+            if (errorCode === "thpracPathMissing") {
+                errorDialog.message = qsTr("Please set a valid thprac.exe path in Binary Manager.");
+            } else {
+                errorDialog.message = qsTr("Failed to start thprac.");
+            }
+            errorDialog.open();
+        }
+    }
+
+    Dialog {
+        id: errorDialog
+        property string message: ""
+        modal: true
+        title: qsTr("Launch Error")
+        width: 450
+        anchors.centerIn: parent
+        contentItem: Label {
+            text: errorDialog.message
+            color: "white"
+            wrapMode: Text.WordWrap
+        }
+        Dialog.DialogButton {
+            text: qsTr("Close")
+            onClicked: errorDialog.close()
+        }
     }
 
     ThcrapConfigDialog {
@@ -143,23 +203,21 @@ Dialog {
         }
     }
 
-    Dialog.DialogButton {
-        text: qsTr("Launch Game")
-        onClicked: control.launchGame()
+    Repeater {
+        model: control.launchOptions()
+        delegate: Dialog.DialogButton {
+            required property string modelData
+            text: control.optionLabel(modelData)
+            fontCapitalization: Font.MixedCase
+            onClicked: control.launchOption(modelData)
+        }
     }
 
     Dialog.DialogButton {
-        text: qsTr("Launch with thcrap")
-        fontCapitalization: Font.MixedCase
-        onClicked: control.launchWithThcrap()
-    }
-
-    Dialog.DialogButton {
+        visible: control.launchOptions().indexOf("thcrap") !== -1
         text: qsTr("Configure thcrap")
         fontCapitalization: Font.MixedCase
-        onClicked: {
-            thcrapConfigDialog.open()
-        }
+        onClicked: thcrapConfigDialog.open()
     }
 
     // Dialog.DialogButton {

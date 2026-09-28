@@ -4,111 +4,132 @@
       "en_title": "Highly Responsive to Prayers",
       "jp_title": "東方靈異伝",
       "game_id": "th01",
-      "isPC98": true
+      "isPC98": true,
+      "launch_options": ["normal"]
     },
     "th02": {
       "en_title": "Story of Eastern Wonderland",
       "jp_title": "東方封魔録",
       "game_id": "th02",
-      "isPC98": true
+      "isPC98": true,
+      "launch_options": ["normal"]
     },
     "th03": {
       "en_title": "Phantasmagoria of Dim.Dream",
       "jp_title": "東方夢時空",
       "game_id": "th03",
-      "isPC98": true
+      "isPC98": true,
+      "launch_options": ["normal"]
     },
     "th04": {
       "en_title": "Lotus Land Story",
       "jp_title": "東方幻想郷",
       "game_id": "th04",
-      "isPC98": true
+      "isPC98": true,
+      "launch_options": ["normal"]
     },
     "th05": {
       "en_title": "Mystic Square",
       "jp_title": "東方怪綺談",
       "game_id": "th05",
-      "isPC98": true
+      "isPC98": true,
+      "launch_options": ["normal"]
     },
     "th06": {
       "en_title": "Embodiment of Scarlet Devil",
       "jp_title": "東方紅魔郷",
-      "game_id": "th06"
+      "game_id": "th06",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th06_nc": {
       "en_title": "Embodiment of Scarlet Devil : New Classic",
       "jp_title": "東方紅魔郷 : New Classic",
-      "game_id": "th06_nc"
+      "game_id": "th06_nc",
+      "launch_options": ["normal"]
     },
     "th07": {
       "en_title": "Perfect Cherry Blossom",
       "jp_title": "東方妖々夢",
-      "game_id": "th07"
+      "game_id": "th07",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th08": {
       "en_title": "Imperishable Night",
       "jp_title": "東方永夜抄",
-      "game_id": "th08"
+      "game_id": "th08",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th09": {
       "en_title": "Phantasmagoria of Flower View",
       "jp_title": "東方花映塚",
-      "game_id": "th09"
+      "game_id": "th09",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th10": {
       "en_title": "Mountain of Faith",
       "jp_title": "東方風神録",
-      "game_id": "th10"
+      "game_id": "th10",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th11": {
       "en_title": "Subterranean Animism",
       "jp_title": "東方地霊殿",
-      "game_id": "th11"
+      "game_id": "th11",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th12": {
       "en_title": "Undefined Fantastic Object",
       "jp_title": "東方星蓮船",
-      "game_id": "th12"
+      "game_id": "th12",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th13": {
       "en_title": "Ten Desires",
       "jp_title": "東方神霊廟",
-      "game_id": "th13"
+      "game_id": "th13",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th14": {
       "en_title": "Double Dealing Character",
       "jp_title": "東方輝針城",
-      "game_id": "th14"
+      "game_id": "th14",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th15": {
       "en_title": "Legacy of Lunatic Kingdom",
       "jp_title": "東方紺珠伝",
-      "game_id": "th15"
+      "game_id": "th15",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th16": {
       "en_title": "Hidden Star in Four Seasons",
       "jp_title": "東方天空璋",
-      "game_id": "th16"
+      "game_id": "th16",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th17": {
       "en_title": "Wily Beast and Weakest Creature",
       "jp_title": "東方鬼形獣",
-      "game_id": "th17"
+      "game_id": "th17",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th18": {
       "en_title": "Unconnected Marketeers",
       "jp_title": "東方虹龍洞",
-      "game_id": "th18"
+      "game_id": "th18",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th19": {
       "en_title": "Unfinished Dream of All Living Ghost",
       "jp_title": "東方獣王園",
-      "game_id": "th19"
+      "game_id": "th19",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th20": {
       "en_title": "Fossilized Wonders",
       "jp_title": "東方錦上京",
-      "game_id": "th20"
+      "game_id": "th20",
+      "launch_options": ["normal", "thprac", "thcrap"]
     }
   },
   "spinoffs": {
@@ -120,57 +141,68 @@
     "th09_5": {
       "en_title": "Shoot the Bullet",
       "jp_title": "東方文花帖",
-      "game_id": "th09_5"
+      "game_id": "th09_5",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th10_5": {
       "en_title": "Scarlet Weather Rhapsody",
       "jp_title": "東方緋想天",
-      "game_id": "th10_5"
+      "game_id": "th10_5",
+      "launch_options": ["normal", "thcrap"]
     },
     "th12_3": {
       "en_title": "Hisoutensoku",
       "jp_title": "東方非想天則",
-      "game_id": "th12_3"
+      "game_id": "th12_3",
+      "launch_options": ["normal", "thcrap"]
     },
     "th12_5": {
       "en_title": "Double Spoiler",
       "jp_title": "ダブルスポイラー",
-      "game_id": "th12_5"
+      "game_id": "th12_5",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th12_8": {
       "en_title": "Great Fairy Wars",
       "jp_title": "妖精大戦争",
-      "game_id": "th12_8"
+      "game_id": "th12_8",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th13_5": {
       "en_title": "Hopeless Masquerade",
       "jp_title": "東方心綺楼",
-      "game_id": "th13_5"
+      "game_id": "th13_5",
+      "launch_options": ["normal", "thcrap"]
     },
     "th14_3": {
       "en_title": "Impossible Spell Card",
       "jp_title": "弾幕アマノジャク",
-      "game_id": "th14_3"
+      "game_id": "th14_3",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th14_5": {
       "en_title": "Urban Legend in Limbo",
       "jp_title": "東方深秘録",
-      "game_id": "th14_5"
+      "game_id": "th14_5",
+      "launch_options": ["normal", "thcrap"]
     },
     "th15_5": {
       "en_title": "Antinomy of Common Flowers",
       "jp_title": "東方憑依華",
-      "game_id": "th15_5"
+      "game_id": "th15_5",
+      "launch_options": ["normal", "thcrap"]
     },
     "th16_5": {
       "en_title": "Violet Detector",
       "jp_title": "秘封ナイトメアダイアリー",
-      "game_id": "th16_5"
+      "game_id": "th16_5",
+      "launch_options": ["normal", "thprac", "thcrap"]
     },
     "th18_5": {
       "en_title": "100th Black Market",
       "jp_title": "秘封ナイトメアダイアリー",
-      "game_id": "th18_5"
+      "game_id": "th18_5",
+      "launch_options": ["normal", "thprac", "thcrap"]
     }
   }
 }

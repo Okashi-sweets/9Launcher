@@ -3,17 +3,20 @@
     "shuusou-gyoku": {
       "en_title": "Shuusou Gyoku",
       "jp_title": "秋霜玉",
-      "game_id": "sh01"
+      "game_id": "sh01",
+      "launch_options": ["normal"]
     },
     "kioh-gyoku": {
       "en_title": "Kioh Gyoku",
       "jp_title": "稀翁玉",
-      "game_id": "sh02"
+      "game_id": "sh02",
+      "launch_options": ["normal"]
     },
     "banshiryuu": {
       "en_title": "Banshiryuu",
       "jp_title": "幡紫竜",
-      "game_id": "sh03"
+      "game_id": "sh03",
+      "launch_options": ["normal"]
     }
   }
 }

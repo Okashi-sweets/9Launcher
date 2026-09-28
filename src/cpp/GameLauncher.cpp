@@ -5,6 +5,7 @@
 #include <QThread>
 #include <QProcess>
 #include <QStandardPaths>
+#include <QFileInfo>
 #include <qstringview.h>
 #ifdef Q_OS_LINUX
 #include <unistd.h>
@@ -21,7 +22,17 @@ static bool launched = false;
 static GameInfo currentGameInfo;
 
 
-GameLauncher::GameLauncher(QObject *parent) : QObject(parent) {}
+GameLauncher::GameLauncher(QObject *parent) : QObject(parent)
+{
+    m_thpracProcess = new QProcess(this);
+    connect(m_thpracProcess, &QProcess::errorOccurred, this, [this](QProcess::ProcessError) {
+        emit launchError("thpracStartFailed");
+    });
+    connect(m_thpracProcess, &QProcess::finished, this, [](int, QProcess::ExitStatus) {
+        RPC rpc;
+        rpc.setRPC("In the main menu");
+    });
+}
 
 bool GameLauncher::LaunchThread(const QString &gamePath, const QString &gameCWD, const QString &gameName, const QString &gameIcon)
 {
@@ -131,6 +142,43 @@ Q_INVOKABLE bool GameLauncher::launchWithThcrap(const QString &configPath, const
     thread->start();
 
     return true;
+}
+
+Q_INVOKABLE bool GameLauncher::launchWithThprac(const QString &gamePath, const QString &gameCWD, const QString &gameName, const QString &gameIcon)
+{
+#ifdef Q_OS_LINUX
+    Q_UNUSED(gamePath);
+    Q_UNUSED(gameCWD);
+    Q_UNUSED(gameName);
+    Q_UNUSED(gameIcon);
+    return false;
+#else
+    if (m_thpracProcess->state() != QProcess::NotRunning) {
+        return false;
+    }
+
+    const QString thpracPath = settings.value("thprac").toString();
+    if (thpracPath.isEmpty() || !QFileInfo::isFile(thpracPath)) {
+        emit launchError("thpracPathMissing");
+        return false;
+    }
+
+    const QString localPath = QUrl(gamePath).toLocalFile();
+    const QString localCWD = QUrl(gameCWD).toLocalFile();
+    currentGameInfo.gamePath = localPath;
+    currentGameInfo.gameCWD = localCWD;
+    currentGameInfo.gameName = gameName;
+    currentGameInfo.gameIcon = gameIcon;
+
+    m_thpracProcess->setProgram(thpracPath);
+    m_thpracProcess->setArguments({localPath});
+    m_thpracProcess->setWorkingDirectory(localCWD);
+    m_thpracProcess->start();
+
+    RPC rpc;
+    rpc.setRPC("Playing " + gameName.toStdString(), gameIcon.toStdString(), gameName.toStdString());
+    return true;
+#endif
 }
 
 bool GameLauncher::LaunchThcrapThread(const QString &configPath, const QString &gamePath, const QString &gameCWD, const QString &gameName, const QString &gameIcon)

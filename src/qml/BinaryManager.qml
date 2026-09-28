@@ -2,6 +2,7 @@ import NineLauncher
 
 import QtQuick
 import QtQuick.Controls.Material
+import QtQuick.Dialogs
 import QtCore
 import QtQuick.Layouts
 
@@ -14,7 +15,7 @@ Window {
     id: root
     color: "#2f2f2f"
     width: 600
-    height: 600
+    height: 700
     minimumWidth: width
     minimumHeight: height
     maximumWidth: width
@@ -90,13 +91,58 @@ Window {
         Layout.preferredWidth: 100
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
+        anchors.topMargin: 300
+        visible: Qt.platform.os === "linux" || Qt.platform.os === "windows"
+    }
+
+    H3 {
+        text: qsTr("thprac")
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
         anchors.topMargin: 200
+        visible: Qt.platform.os === "windows"
     }
 
     RowLayout {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 250
+        visible: Qt.platform.os === "windows"
+
+        MButton {
+            text: qsTr("Select thprac.exe")
+            Layout.preferredWidth: 220
+            onClicked: thpracFileDialog.open()
+        }
+
+        MButton {
+            text: qsTr("Clear thprac path")
+            Layout.preferredWidth: 180
+            onClicked: {
+                AppSettings.setValue("thprac", "")
+                statusOutput.color = "#70fa6b"
+                statusOutput.text = qsTr("thprac path cleared.")
+            }
+        }
+    }
+
+    FileDialog {
+        id: thpracFileDialog
+        title: qsTr("Select thprac.exe")
+        fileMode: FileDialog.OpenFile
+        nameFilters: [qsTr("thprac executable (*.exe)")]
+        onAccepted: {
+            const path = thpracFileDialog.currentFile.toLocalFile()
+            AppSettings.setValue("thprac", path)
+            statusOutput.color = "#70fa6b"
+            statusOutput.text = qsTr("thprac path saved.")
+        }
+    }
+
+    RowLayout {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 350
 
         MButton {
             text: qsTr("Use System Dosbox-x")
@@ -135,7 +181,7 @@ Window {
         Layout.preferredWidth: 100
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 300
+        anchors.topMargin: 400
     }
 
     NumberAnimation {
@@ -147,7 +193,7 @@ Window {
     RowLayout {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 350
+        anchors.topMargin: 450
 
         MButton {
             text: qsTr("Use System Wine")
@@ -175,7 +221,7 @@ Window {
     RowLayout {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 415
+        anchors.topMargin: 515
 
         H5 {
             text: ""
@@ -228,7 +274,7 @@ Window {
     Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 450
+        anchors.topMargin: 550
 
         width: parent.width - 50
 
