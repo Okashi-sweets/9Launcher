@@ -22,6 +22,17 @@ Q_INVOKABLE void AppSettings::setValue(const QString &key, const QVariant &value
     return QSettings::setValue(key, value);
 }
 
+Q_INVOKABLE bool AppSettings::setUrlValue(const QString &key, const QUrl &value) {
+    const QString localPath = value.toLocalFile();
+    if (localPath.isEmpty()) {
+        return false;
+    }
+
+    QSettings::setValue(key, localPath);
+    sync();
+    return QSettings::value(key).toString() == localPath;
+}
+
 Q_INVOKABLE void AppSettings::clear() {
     return QSettings::clear();
 }

@@ -1,5 +1,6 @@
 #include <QObject>
 #include <QSettings>
+#include <QUrl>
 #include <QVariant>
 #include <QMetaType>
 #include <qobject.h>
@@ -15,6 +16,8 @@ public:
     Q_INVOKABLE QVariant value(const QString &key) const;
 
     Q_INVOKABLE void setValue(const QString &key, const QVariant &value);
+
+    Q_INVOKABLE bool setUrlValue(const QString &key, const QUrl &value);
 
     Q_INVOKABLE void clear();
 };

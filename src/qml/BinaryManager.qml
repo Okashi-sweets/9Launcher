@@ -15,7 +15,7 @@ Window {
     id: root
     color: "#2f2f2f"
     width: 600
-    height: 700
+    height: 740
     minimumWidth: width
     minimumHeight: height
     maximumWidth: width
@@ -23,10 +23,36 @@ Window {
 
     property string appData: StandardPaths.writableLocation(StandardPaths.AppDataLocation)
     property string wineVerToSave: ""
+    property string thpracPath: ""
 
     onClosing: {
         downloader.CancelDownloads()
     }
+
+    function loadThpracPath() {
+        thpracPath = AppSettings.value("thprac", "").toString()
+    }
+
+    function saveThpracPath(url) {
+        if (!AppSettings.setUrlValue("thprac", url)) {
+            thpracStatusOutput.color = "#ff4040"
+            thpracStatusOutput.text = qsTr("Failed to save thprac path.")
+            return
+        }
+
+        const savedPath = AppSettings.value("thprac", "").toString()
+        if (savedPath.length === 0) {
+            thpracStatusOutput.color = "#ff4040"
+            thpracStatusOutput.text = qsTr("Failed to verify thprac path.")
+            return
+        }
+
+        thpracPath = savedPath
+        thpracStatusOutput.color = "#70fa6b"
+        thpracStatusOutput.text = qsTr("thprac path saved.")
+    }
+
+    Component.onCompleted: loadThpracPath()
 
     FileIO {
         id: fileIO;
@@ -91,7 +117,7 @@ Window {
         Layout.preferredWidth: 100
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 300
+        anchors.topMargin: 340
         visible: Qt.platform.os === "linux" || Qt.platform.os === "windows"
     }
 
@@ -120,8 +146,9 @@ Window {
             Layout.preferredWidth: 180
             onClicked: {
                 AppSettings.setValue("thprac", "")
-                statusOutput.color = "#70fa6b"
-                statusOutput.text = qsTr("thprac path cleared.")
+                loadThpracPath()
+                thpracStatusOutput.color = "#70fa6b"
+                thpracStatusOutput.text = qsTr("thprac path cleared.")
             }
         }
     }
@@ -132,17 +159,38 @@ Window {
         fileMode: FileDialog.OpenFile
         nameFilters: [qsTr("thprac executable (*.exe)")]
         onAccepted: {
-            const path = thpracFileDialog.selectedFile.toLocalFile()
-            AppSettings.setValue("thprac", path)
-            statusOutput.color = "#70fa6b"
-            statusOutput.text = qsTr("thprac path saved.")
+            saveThpracPath(thpracFileDialog.selectedFile)
         }
+    }
+
+    Text {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 280
+        width: parent.width - 50
+        color: "#e3e3e3"
+        text: qsTr("Current thprac path: %1").arg(thpracPath || qsTr("Not set"))
+        elide: Text.ElideMiddle
+        visible: Qt.platform.os === "windows"
+    }
+
+    Text {
+        id: thpracStatusOutput
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 300
+        width: parent.width - 50
+        color: "#ff4040"
+        font.pixelSize: 14
+        text: ""
+        wrapMode: Text.WordWrap
+        visible: Qt.platform.os === "windows"
     }
 
     RowLayout {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 350
+        anchors.topMargin: 390
 
         MButton {
             text: qsTr("Use System Dosbox-x")
@@ -181,7 +229,7 @@ Window {
         Layout.preferredWidth: 100
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 400
+        anchors.topMargin: 440
     }
 
     NumberAnimation {
@@ -193,7 +241,7 @@ Window {
     RowLayout {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 450
+        anchors.topMargin: 490
 
         MButton {
             text: qsTr("Use System Wine")
@@ -221,7 +269,7 @@ Window {
     RowLayout {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 515
+        anchors.topMargin: 555
 
         H5 {
             text: ""
@@ -274,7 +322,7 @@ Window {
     Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 550
+        anchors.topMargin: 590
 
         width: parent.width - 50
 
