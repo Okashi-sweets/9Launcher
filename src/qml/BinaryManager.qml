@@ -132,7 +132,7 @@ Window {
         fileMode: FileDialog.OpenFile
         nameFilters: [qsTr("thprac executable (*.exe)")]
         onAccepted: {
-            const path = thpracFileDialog.currentFile.toLocalFile()
+            const path = thpracFileDialog.selectedFile.toLocalFile()
             AppSettings.setValue("thprac", path)
             statusOutput.color = "#70fa6b"
             statusOutput.text = qsTr("thprac path saved.")

@@ -28,10 +28,6 @@ GameLauncher::GameLauncher(QObject *parent) : QObject(parent)
     connect(m_thpracProcess, &QProcess::errorOccurred, this, [this](QProcess::ProcessError) {
         emit launchError("thpracStartFailed");
     });
-    connect(m_thpracProcess, &QProcess::finished, this, [](int, QProcess::ExitStatus) {
-        RPC rpc;
-        rpc.setRPC("In the main menu");
-    });
 }
 
 bool GameLauncher::LaunchThread(const QString &gamePath, const QString &gameCWD, const QString &gameName, const QString &gameIcon)
