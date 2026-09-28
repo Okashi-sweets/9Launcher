@@ -154,7 +154,7 @@ Q_INVOKABLE bool GameLauncher::launchWithThprac(const QString &gamePath, const Q
     }
 
     const QString thpracPath = settings.value("thprac").toString();
-    if (thpracPath.isEmpty() || !QFileInfo::isFile(thpracPath)) {
+    if (thpracPath.isEmpty() || !QFileInfo(thpracPath).isFile()) {
         emit launchError("thpracPathMissing");
         return false;
     }
