@@ -58,6 +58,11 @@ endif()
 
 find_package(Qt6 REQUIRED COMPONENTS Quick QuickControls2 Core Core5Compat ShaderTools LinguistTools)
 
+# Keep the existing /<module-uri> resource layout while explicitly selecting
+# the qmldir behavior required by Qt 6.8+ for QML files in subdirectories.
+qt_policy(SET QTP0001 OLD)
+qt_policy(SET QTP0004 NEW)
+
 qt_add_executable(9Launcher
     src/main.cpp
 )
